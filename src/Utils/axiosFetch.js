@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const fetchMovies = axios.create({
   baseURL: 'http://www.omdbapi.com/',
-  timeout: 15000
+  // timeout: 15000
 })
 
 export const fetchMovieDetails = async (title) => {

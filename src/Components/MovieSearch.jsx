@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { fetchMovieDetails } from '../Utils/axiosFetch';
+import { FaSearch } from 'react-icons/fa';
 
 const MovieSearch = () => {
     const [movie, setMovie] = useState(null);
@@ -12,6 +13,7 @@ const MovieSearch = () => {
             const movieData = await fetchMovieDetails(searchWord);
             setMovie(movieData);
             console.log(movieData);
+            setSearchWord('');
         } catch (error) {
             if (error.code === 'ECONNABORTED') {
                 setError('The request took too long - please try again');
@@ -31,20 +33,15 @@ const MovieSearch = () => {
 
     return (
         <div>
-            <div className=''>
+            <div className='border border-white rounded-full px-4 py-2 flex gap-2 items-center justify-center'>
                 <input
                     type='text'
                     value={searchWord}
                     onChange={(e) => setSearchWord(e.target.value)}
-                    className='border border-black'
+                    className='focus:outline-0 w-56 bg-transparent placeholder:text-white'
+                    placeholder='Search movie and press enter'
                 />
-                <br />
-                <button
-                    onClick={handleSearch}
-                    className='bg-blue-500 text-white px-4 py-2'
-                >
-                    Search
-                </button>
+                <FaSearch onClick={handleSearch} className='cursor-pointer' />
             </div>
         </div>
     );
